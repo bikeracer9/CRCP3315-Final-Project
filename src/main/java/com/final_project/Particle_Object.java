@@ -1,30 +1,39 @@
 /*
  * Prescott Lau
- * Particle Engine 3 Assignment
- * September 24th, 2024
- * This file is Superclass for all the particle objects.
+ * Final Project
+ * November 11th 2024
+ * This file is Superclass for all the objects: 
+ *                                          NPC (super class for enemies, coins & power ups).
+ *                                          Battleship (user controlled).
  */
 
 package com.final_project;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class Particle_Object {
     PApplet main; //processing functionality
 
     float x,y; //location
-    int color; //color of the Particle Object
+    // int color; //color of the Particle Object
     float xVel, yVel; //velocity of the Particle Object
-    float size; //size of the Particle Object
+    // float size; //size of the Particle Object
     int alphaValue; //value that changes the Particle Objects opacity. 
     boolean hit; //if the game object has been hit.
+    PImage img;
+    int img_width, img_height;
+    
 
     //initializes everything
-    Particle_Object(PApplet main_, float size_, int color_, int a)
+    Particle_Object(PApplet main_, PImage img_, int img_width_, int img_height_, int a) 
     {
         main = main_;
-        size = size_;
-        color = color_;
+        // size = size_;
+        // color = color_;
+        img = img_;
+        img_width = img_width_;
+        img_height = img_height_;
         alphaValue = a;
     }    
 
@@ -42,8 +51,10 @@ public class Particle_Object {
 
     void display()
     {
-        main.fill(color, alphaValue);
-        main.ellipse(x, y, size, size);
+        main.image(img, x, y, img_width, img_height);
+        //main.fill(color, alphaValue);
+        //main.ellipse(x, y, size, size);
+        //main.image(bomb, x, y);
     }
 
     /*
@@ -68,7 +79,7 @@ public class Particle_Object {
         //     xVel = xVel * -1;
         // }
 
-        if(x < (0 + size/2)) //if the value of the ball on the X axis is greater than
+        if(x < (0 + img_width/2)) //if the value of the ball on the X axis is greater than
         {        //the left of the screen value then, the ball will change directions.
             //spawn();
         }
@@ -95,7 +106,7 @@ public class Particle_Object {
     */
     float getSize()
     {
-        return size;
+        return img_width;
     }
 
     /*
@@ -104,7 +115,7 @@ public class Particle_Object {
     boolean isHit(Particle_Object object)
     {
         float distance = PApplet.dist(x, y, object.getX(), object.getY());
-        return (distance < (size/2 + object.getSize()/2));
+        return (distance < (img_width/2 + object.getSize()/2));
     }
 
 }

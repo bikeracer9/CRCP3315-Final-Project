@@ -8,18 +8,20 @@
 package com.final_project;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class Battleship extends Particle_Object{
 
-    int health = 2; //health, determines when the game ends (loses).
+    int health = 200; //health, determines when the game ends (loses).
     int coins = 0; //coins - determines when the game ends (wins!)
     float  random_number = (int)main.random(0,4);
     String message = ""; // prints out a message for power up object.
+    PImage battleshipImg_ = main.loadImage("./images/battleship.png");
 
-    Battleship(PApplet main_)
+    Battleship(PApplet main_, PImage battleshipImg_)
     {
-        super(main_, 30, main_.color(0,255,0), 255);
-        x = main.width/2;
+        super(main_, battleshipImg_, 128, 128, 255);
+        x = main.width/7;
         y = main_.height/2;
     }
 
@@ -27,7 +29,9 @@ public class Battleship extends Particle_Object{
     void display()
     {
         super.display();
-        main.rect(x, y, size * 2, size);
+        // main.rect(x, y, img_width * 2, img_width);
+        ////?????????????????????????????????????????
+
     }
 
     void setLocation(float x_, float y_)
@@ -46,18 +50,18 @@ public class Battleship extends Particle_Object{
             {
                 main.fill(255,0,0, 200); //code to display a red box on the screen when you lose health
                 main.rectMode(0);
-                main.rect(0,0,800,800);
+                main.rect(0,0,main.width,main.height);
                 health--;
                 System.out.println("Health = " + health);
             }
 
-            if(object instanceof Loot)
+            // if(object instanceof Loot)
             {
                 coins++;
                 System.out.println("Coins = " + coins);
             }
 
-            if(object instanceof Power_Up) //randomly will do something interesting, 
+            // if(object instanceof Power_Up) //randomly will do something interesting, 
             {                              //look @ power_up class for more information!
                 random_number = (int)main.random(0,7);
                 if(random_number == 0)

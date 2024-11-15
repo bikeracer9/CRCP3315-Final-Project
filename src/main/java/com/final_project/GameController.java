@@ -1,6 +1,7 @@
 /*
  * Prescott Lau
- * September 30th
+ * Final Project
+ * November 11th 2024
  * This class controls the gameplay and everything related to it.
  */
 package com.final_project;

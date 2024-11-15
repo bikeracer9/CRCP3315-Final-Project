@@ -1,7 +1,7 @@
 /*
  * Prescott Lau
- * Particle Engine 3 Assignment
- * September 24th, 2024
+ * Final Project
+ * November 11th 2024
  * This file controls the particles!
  */
 
@@ -10,6 +10,7 @@ package com.final_project;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class GamePlayState extends GameController {
     //PApplet main; //the main class, which has all the processing functionality.
@@ -19,16 +20,18 @@ public class GamePlayState extends GameController {
      */
 
     Battleship ship;
+    PImage bombImg = main.loadImage("./images/bomb_2_w.jpg"); //bomb_2.png
+    PImage battleshipImg = main.loadImage("./images/battleship.png");
 
     ArrayList<NPC> npc;
 
-    ArrayList<Loot> loot;
+    // ArrayList<Loot> loot;
     int loot_count = 0;
 
     ArrayList<Enemy> enemies;
     int enemy_count = 7;
 
-    ArrayList<Power_Up> PowerUp;
+    // ArrayList<Power_Up> PowerUp;
     int PowerUpCount = 0;
     
         ArrayList<Particle_Object> particle_Objects;
@@ -44,31 +47,31 @@ public class GamePlayState extends GameController {
      */
         public void init()
         {    
-            ship = new Battleship(main);
+            ship = new Battleship(main, battleshipImg);
             npc = new ArrayList();
-            loot = new ArrayList();
+            // loot = new ArrayList();
             enemies = new ArrayList();
-            PowerUp = new ArrayList();
+            // PowerUp = new ArrayList();
     
             for(int i = 0; i < loot_count; i++)
             {
-                loot.add( new Loot(main) );
+                // loot.add( new Loot(main) );
             }
     
             for(int i = 0; i < PowerUpCount; i++)
             {
-                PowerUp.add( new Power_Up(main) );
+                // PowerUp.add( new Power_Up(main) );
             }
            
             for(int i = 0; i < enemy_count; i++)
             {
-                enemies.add( new Enemy(main) );
+                enemies.add( new Enemy(main, bombImg) );
             }
     
             //add all the NPC
-            npc.addAll(loot);
+            // npc.addAll(loot);
             npc.addAll(enemies);
-            npc.addAll(PowerUp);
+            // npc.addAll(PowerUp);
             
             //add all the small particles to the big particle object ArrayList
             particle_Objects = new ArrayList();
@@ -81,7 +84,7 @@ public class GamePlayState extends GameController {
          */
         public void draw()
         {
-            main.background(0); //draw the background
+            main.background(0,128,255); //draw the background
             display(); //display all objects
             move(); //move the objects
             collisions(); //check collisions btwn circles
@@ -140,6 +143,11 @@ public class GamePlayState extends GameController {
         {
             ship.keyPressed();
         }
+
+        // public void keyReleased()
+        // {
+        //     ship.keyReleased();
+        // }
         // //change the location of the avatar, hooked up w mouseDragged in main.
         // public void setAvatarLocation(float x, float y)
         // {
@@ -167,9 +175,9 @@ public class GamePlayState extends GameController {
         public void text()
         {
             main.textSize(15);
-            main.fill(255);
+            main.fill(0);
             main.text("Health: " + (int)ship.getHealth(), 35, 35);
-            main.text("Coins: " + (int)ship.getCoins(), 35, 65);
+            //main.text("Coins: " + (int)ship.getCoins(), 35, 65);
             main.text("" + ship.getMessage(), 35, 95);
         }
 

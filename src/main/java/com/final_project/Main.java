@@ -24,7 +24,8 @@ public class Main extends PApplet {
     //sets up the size of the window
     public void settings()
     {
-        size(1000, 800);
+        size(1400, 800);
+        //fullScreen();
         
         controllers.add(new GamePlayState(this) );
         controllers.add(new GameEndController(this) );
