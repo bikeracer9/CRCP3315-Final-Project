@@ -11,7 +11,7 @@ import processing.core.PImage;
 
 public class Enemy extends NPC
 {                                                   ////bomb_2.png
-    PImage bombImg_ = main.loadImage("./images/bomb_2_w.jpg"); //declaring the bomb image
+    PImage bombImg_ = main.loadImage("./images/bomb_3.png"); //declaring the bomb image
 
     Enemy(PApplet main_, PImage bombImg_)
     { // PApplet main_, PImage img_, int img_width_, int img_height_, int a

@@ -55,13 +55,13 @@ public class Battleship extends Particle_Object{
                 System.out.println("Health = " + health);
             }
 
-            // if(object instanceof Loot)
+            if(object instanceof Loot)
             {
                 coins++;
                 System.out.println("Coins = " + coins);
             }
 
-            // if(object instanceof Power_Up) //randomly will do something interesting, 
+            if(object instanceof Power_Up) //randomly will do something interesting, 
             {                              //look @ power_up class for more information!
                 random_number = (int)main.random(0,7);
                 if(random_number == 0)

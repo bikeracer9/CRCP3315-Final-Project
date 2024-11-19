@@ -20,21 +20,29 @@ public class GamePlayState extends GameController {
      */
 
     Battleship ship;
-    PImage bombImg = main.loadImage("./images/bomb_2_w.jpg"); //bomb_2.png
+    PImage bombImg = main.loadImage("./images/bomb_3.png"); //bomb_2.png
     PImage battleshipImg = main.loadImage("./images/battleship.png");
+    PImage waveImg = main.loadImage("./images/wave.png");
+    PImage coinImg = main.loadImage("./images/coin.png");
+    PImage powerUpImage = main.loadImage("./images/powerUp_1.png");
 
     ArrayList<NPC> npc;
 
-    // ArrayList<Loot> loot;
-    int loot_count = 0;
+    ArrayList<Loot> loot;
+    int loot_count = 3;
 
     ArrayList<Enemy> enemies;
     int enemy_count = 7;
 
-    // ArrayList<Power_Up> PowerUp;
-    int PowerUpCount = 0;
+    ArrayList<Power_Up> PowerUp;
+    int PowerUpCount = 2;
     
-        ArrayList<Particle_Object> particle_Objects;
+    ArrayList<Wave> waves;
+    int waveCount = 0;
+    
+    ArrayList<Particle_Object> particle_Objects;
+
+    LinkedList list;
     
         public GamePlayState(PApplet main_) 
         {
@@ -49,18 +57,24 @@ public class GamePlayState extends GameController {
         {    
             ship = new Battleship(main, battleshipImg);
             npc = new ArrayList();
-            // loot = new ArrayList();
+            loot = new ArrayList();
+            waves = new ArrayList();
             enemies = new ArrayList();
-            // PowerUp = new ArrayList();
+            PowerUp = new ArrayList();
     
+            // for(int i = 0; i < waveCount; i++)
+            // {
+            //     waves.add( new Wave(main, waveImg) );
+            // }
+
             for(int i = 0; i < loot_count; i++)
             {
-                // loot.add( new Loot(main) );
+                loot.add( new Loot(main, coinImg) );
             }
     
             for(int i = 0; i < PowerUpCount; i++)
             {
-                // PowerUp.add( new Power_Up(main) );
+                PowerUp.add( new Power_Up(main, powerUpImage) );
             }
            
             for(int i = 0; i < enemy_count; i++)
@@ -69,9 +83,10 @@ public class GamePlayState extends GameController {
             }
     
             //add all the NPC
-            // npc.addAll(loot);
+            npc.addAll(loot);
+            // npc.addAll(waves);
             npc.addAll(enemies);
-            // npc.addAll(PowerUp);
+            npc.addAll(PowerUp);
             
             //add all the small particles to the big particle object ArrayList
             particle_Objects = new ArrayList();
@@ -177,7 +192,7 @@ public class GamePlayState extends GameController {
             main.textSize(15);
             main.fill(0);
             main.text("Health: " + (int)ship.getHealth(), 35, 35);
-            //main.text("Coins: " + (int)ship.getCoins(), 35, 65);
+            main.text("Coins: " + (int)ship.getCoins(), 35, 65);
             main.text("" + ship.getMessage(), 35, 95);
         }
 
