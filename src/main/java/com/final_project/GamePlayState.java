@@ -20,11 +20,13 @@ public class GamePlayState extends GameController {
      */
 
     Battleship ship;
+
     PImage bombImg = main.loadImage("./images/bomb_3.png"); //bomb_2.png
     PImage battleshipImg = main.loadImage("./images/battleship.png");
-    PImage waveImg = main.loadImage("./images/wave.png");
+    PImage waveImg = main.loadImage("./images/wave_2.png");
     PImage coinImg = main.loadImage("./images/coin.png");
     PImage powerUpImage = main.loadImage("./images/powerUp_1.png");
+    PImage healthImage = main.loadImage("./images/heart_1.png");
 
     ArrayList<NPC> npc;
 
@@ -38,17 +40,17 @@ public class GamePlayState extends GameController {
     int PowerUpCount = 2;
     
     ArrayList<Wave> waves;
-    int waveCount = 0;
+    int waveCount = 3;
     
     ArrayList<Particle_Object> particle_Objects;
 
     LinkedList list;
     
-        public GamePlayState(PApplet main_) 
-        {
-            super(main_);
-            init(); //initialize all the objects
-        }
+    public GamePlayState(PApplet main_) 
+    {
+        super(main_);
+        init(); //initialize all the objects
+    }
     
     /*
      * This function initializes all the objects in the code.
@@ -56,16 +58,19 @@ public class GamePlayState extends GameController {
         public void init()
         {    
             ship = new Battleship(main, battleshipImg);
+            
             npc = new ArrayList();
             loot = new ArrayList();
             waves = new ArrayList();
             enemies = new ArrayList();
             PowerUp = new ArrayList();
+
+            list = new LinkedList();
     
-            // for(int i = 0; i < waveCount; i++)
-            // {
-            //     waves.add( new Wave(main, waveImg) );
-            // }
+            for(int i = 0; i < waveCount; i++)
+            {
+                waves.add( new Wave(main, waveImg) );
+            }
 
             for(int i = 0; i < loot_count; i++)
             {
@@ -84,7 +89,7 @@ public class GamePlayState extends GameController {
     
             //add all the NPC
             npc.addAll(loot);
-            // npc.addAll(waves);
+            npc.addAll(waves);
             npc.addAll(enemies);
             npc.addAll(PowerUp);
             
@@ -102,8 +107,9 @@ public class GamePlayState extends GameController {
             main.background(0,128,255); //draw the background
             display(); //display all objects
             move(); //move the objects
-            collisions(); //check collisions btwn circles
+            collisions(); //check collisions btwn objects. //// ???
             text(); //add the text onto the screen.
+            addButtons();
             
             //check to see if we need to end the game
             nextController = GameController.DO_NOT_CHANGE;
@@ -113,9 +119,14 @@ public class GamePlayState extends GameController {
                 nextController = GameController.GAME_END; //draws the end game screen
             }
     
-            if( ship.getCoins() >= 25) //if the player has more than 15 coins, player wins
+            if( ship.getCoins() >= 1000) //if the player has more than 15 coins, player wins
             {
                 nextController = GameController.GAME_WIN; //draws the win game screen
+            }
+
+            if(main.key == 'p' && main.keyPressed == true) 
+            {
+                nextController = GameController.SHOP; //draws the shop screen.
             }
         }
     
@@ -141,7 +152,6 @@ public class GamePlayState extends GameController {
             {
                 ship.collisions(npc.get(i));
                 npc.get(i).collision(ship);
-                
             }
     
         }
@@ -189,11 +199,30 @@ public class GamePlayState extends GameController {
          */
         public void text()
         {
-            main.textSize(15);
+            main.textSize(22);
             main.fill(0);
-            main.text("Health: " + (int)ship.getHealth(), 35, 35);
-            main.text("Coins: " + (int)ship.getCoins(), 35, 65);
+            // main.text("Health: " + (int)ship.getHealth(), 35, 35);
+            int healthCount = (int)ship.getHealth();
+            int x = 15;
+            for(int i = 0; i <  healthCount; i++)
+            {
+                main.image(healthImage, 0 + x, 15, 32, 32);
+                x += 40;
+            }
+            main.text("Coins: " + (int)ship.getCoins(), 15, 75);
             main.text("" + ship.getMessage(), 35, 95);
+        }
+
+        public int updateCoins()
+        {
+            int coins = (int)ship.getCoins();
+            return coins;
+        }
+
+        public void addButtons()
+        {
+            main.fill(255,0,0);
+            main.rect(main.width - 175, 65,125, 55);
         }
 
 }

@@ -18,9 +18,11 @@ public class Particle_Object {
     float x,y; //location
     // int color; //color of the Particle Object
     float xVel, yVel; //velocity of the Particle Object
+    float prevVel_X, prevVel_Y; //used for the pause button!
     // float size; //size of the Particle Object
     int alphaValue; //value that changes the Particle Objects opacity. 
     boolean hit; //if the game object has been hit.
+    boolean paused = true; //if the game is paused, then returns true.
     PImage img;
     int img_width, img_height;
     
@@ -63,6 +65,7 @@ public class Particle_Object {
     void move()
     {
         x += xVel; // equation to make the ball move in the X axis and in the correct direction.
+        // prevVel_X = xVel;
 
         // if(y > (main.height - size/2)) //if the value of the ball on the Y axis is greater than
         // {                   //the bottom of the screen value, then the ball will change directions.
@@ -116,6 +119,24 @@ public class Particle_Object {
     {
         float distance = PApplet.dist(x, y, object.getX(), object.getY());
         return (distance < (img_width/2 + object.getSize()/2));
+    }
+
+    boolean isPaused(boolean p)
+    {
+        return p;
+    }
+    
+    void pauseGame()
+    {
+        if(isPaused(paused) == true)
+        {
+            this.xVel = 0;
+            System.out.println("Paused = " + paused);
+        }
+        else
+        {
+            this.xVel = this.prevVel_X;
+        }
     }
 
 }

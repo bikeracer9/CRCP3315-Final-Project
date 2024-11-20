@@ -5,9 +5,15 @@
  */
 package com.final_project;
 
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 
 public class GameEndController extends GameController {
+
+    ArrayList<OnMousePress> presses = new ArrayList<>(); 
+    // ShopButton s = new ShopButton();
+
     GameEndController(PApplet main_)
     {
         super(main_);
@@ -18,12 +24,17 @@ public class GameEndController extends GameController {
         main.background(0);
         main.fill(255);
         main.textSize(35);
-        main.text("Game Over!", (main.width/2)-125, (main.height/2)-150);
-        main.text("Press spacebar to restart!", (main.width/2)-225, (main.height/2)+25);
+        main.text("You Died!", (main.width/2)-125, (main.height/2)-150);
+        main.text("Press spacebar to try again!", (main.width/2)-225, (main.height/2)+25);
+        addButtons();
     }
+    
     public void mousePressed()
     {
-
+        for(OnMousePress press : presses )
+        {
+            press.mousePressed(main.mouseX, main.mouseY);
+        }
     }
 
     public void mouseDragged()
@@ -41,5 +52,14 @@ public class GameEndController extends GameController {
             }
         }  
     } 
+
+    public void addButtons()
+    {
+        int x_tR = main.width - 200; 
+        int y_tR = main.height - 200; 
+
+        // ShopButton shopB = new ShopButton(this, x_tR, y_tR);
+        // presses.add(shopB);
+    }
 
 }

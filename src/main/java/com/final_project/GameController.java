@@ -18,8 +18,7 @@ public abstract class GameController {
     static final int GAME_WIN = 2;
 
     static final int INTRO = 3;
-
-
+    static final int SHOP = 4; //added the shop
 
     int nextController = DO_NOT_CHANGE;
 

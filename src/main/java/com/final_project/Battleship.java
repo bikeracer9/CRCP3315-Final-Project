@@ -12,8 +12,8 @@ import processing.core.PImage;
 
 public class Battleship extends Particle_Object{
 
-    int health = 200; //health, determines when the game ends (loses).
-    int coins = 0; //coins - determines when the game ends (wins!)
+    int health = 5; //health, determines when the game ends (loses).
+    int coins = 50; //coins - determines when the game ends (wins!)
     float  random_number = (int)main.random(0,4);
     String message = ""; // prints out a message for power up object.
     PImage battleshipImg_ = main.loadImage("./images/battleship.png");
@@ -48,8 +48,9 @@ public class Battleship extends Particle_Object{
         {
             if(object instanceof Enemy)
             {
-                main.fill(255,0,0, 200); //code to display a red box on the screen when you lose health
+                main.fill(255,0,0, 100); //code to display a red box on the screen when you lose health
                 main.rectMode(0);
+                main.rect(0,0,main.width,main.height);
                 main.rect(0,0,main.width,main.height);
                 health--;
                 System.out.println("Health = " + health);
@@ -98,6 +99,12 @@ public class Battleship extends Particle_Object{
                 }
                 System.out.println("Message = " + message);
                 random_number = (int)main.random(0,4);
+            }
+            if(object instanceof Wave)
+            {
+                //dont do anything (hopefully this works, when it collides with a wave.)
+                //Adding wave objects to randomly spawn in that move accross the screen.
+                
             }
         }
     }

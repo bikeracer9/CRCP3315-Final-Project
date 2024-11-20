@@ -21,7 +21,13 @@ public class NPC extends Particle_Object{
         x = (main.width + 50);
         y = main.random(main.height);
 
-        xVel = main.random(-8,-4);
+        xVel = main.random(-8,-5);
+        prevVel_X = xVel;
+        // if(this.y == y)
+        // {
+        //     this.y = main.random(main.height);
+        //     System.out.println("this Y: " + this.y + "   Y: " + y);
+        // } 
         // yVel = main.random(-3,-1);
     }
 

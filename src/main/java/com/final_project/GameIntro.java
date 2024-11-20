@@ -7,11 +7,10 @@
 package com.final_project;
 
 import processing.core.PApplet;
-import processing.core.PImage;
 
 public class GameIntro extends GameController {
 
-    PImage photo = main.loadImage("./images///bomb_2_w.jpg"); //declaring the image
+    // PImage photo = main.loadImage("./images///bomb_2_w.jpg"); //declaring the image
 
     GameIntro(PApplet main_)
     {
@@ -23,7 +22,7 @@ public class GameIntro extends GameController {
         main.background(0,128,255);
         main.fill(0);
         main.textSize(45);
-        main.image(photo, 50,50, 64,64); ////TEST IMAGE! (img, x,y, width, height)
+        // main.image(photo, 50,50, 64,64); ////TEST IMAGE! (img, x,y, width, height)
         main.text("Welcome to Battleship!", (main.width/2) - 100, 250);
         main.textSize(35);
         main.text("Avoid mines and collect coins!", 175, 375);

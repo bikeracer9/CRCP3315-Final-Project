@@ -31,6 +31,7 @@ public class Main extends PApplet {
         controllers.add(new GameEndController(this) );
         controllers.add(new GameWinController(this) );
         controllers.add(new GameIntro(this) );
+        controllers.add(new ShopController(this) );
     }
     
     /*

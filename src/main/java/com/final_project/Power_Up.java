@@ -20,13 +20,13 @@ public class Power_Up extends NPC {
 
     Power_Up(PApplet main_, PImage powerUpImg_)
     {
-        super(main_, powerUpImg_,46,46,255);
+        super(main_, powerUpImg_,40,40,255);
     }
 
     @Override
     void move() 
     {
-        int rand = (int)main.random(0,150);
+        int rand = (int)main.random(0,290);
         {
             x += xVel;
 
@@ -34,15 +34,15 @@ public class Power_Up extends NPC {
             {
                 if(rand == 1)
                 {
-                    spawn();
+                    spawn(); //respawn the powerUp if the number = 1. 
                     
                 }
-                else if(rand != 1)
+                else if(rand != 1) //do nothing if the random number is NOT 1. 
                 {
 
                 }
                 
-                System.out.println("Rand: " + rand);
+                //System.out.println("Rand: " + rand); //test
             }
         }
     }
