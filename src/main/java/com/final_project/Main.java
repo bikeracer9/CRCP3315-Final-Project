@@ -14,6 +14,7 @@ import processing.core.PApplet;
 public class Main extends PApplet {
 
     ArrayList<GameController> controllers = new ArrayList<>();
+    LinkedList list;
     
     int curController = GameController.INTRO;
 
@@ -25,13 +26,16 @@ public class Main extends PApplet {
     public void settings()
     {
         size(1400, 800);
-        //fullScreen();
+        // fullScreen();
+        list = new LinkedList();
         
-        controllers.add(new GamePlayState(this) );
+        controllers.add(new GamePlayState(this, list) );
         controllers.add(new GameEndController(this) );
         controllers.add(new GameWinController(this) );
         controllers.add(new GameIntro(this) );
-        controllers.add(new ShopController(this) );
+        controllers.add(new ShopController(this, list) );
+        controllers.add(new HowToPlayController(this) );
+        controllers.add(new AttemptsController(this, list) );
     }
     
     /*

@@ -46,10 +46,11 @@ public class GamePlayState extends GameController {
 
     LinkedList list;
     
-    public GamePlayState(PApplet main_) 
+    public GamePlayState(PApplet main_, LinkedList list_) 
     {
         super(main_);
         init(); //initialize all the objects
+        this.list = list_;
     }
     
     /*
@@ -65,7 +66,7 @@ public class GamePlayState extends GameController {
             enemies = new ArrayList();
             PowerUp = new ArrayList();
 
-            list = new LinkedList();
+            // list = new LinkedList();
     
             for(int i = 0; i < waveCount; i++)
             {
@@ -117,6 +118,7 @@ public class GamePlayState extends GameController {
             if( ship.getHealth() <= 0)//if the player dies, player loses
             {
                 nextController = GameController.GAME_END; //draws the end game screen
+                list.insertAtEnd( new Node( (int)ship.getCoins() ) );
             }
     
             if( ship.getCoins() >= 1000) //if the player has more than 15 coins, player wins
@@ -127,6 +129,7 @@ public class GamePlayState extends GameController {
             if(main.key == 'p' && main.keyPressed == true) 
             {
                 nextController = GameController.SHOP; //draws the shop screen.
+                
             }
         }
     
@@ -213,6 +216,11 @@ public class GamePlayState extends GameController {
             main.text("" + ship.getMessage(), 35, 95);
         }
 
+        // public void updateCoins2()
+        // {
+        //     int c2 = (int)ship.getCoins();
+        //     ship.setCoins(c2);
+        // }
         public int updateCoins()
         {
             int coins = (int)ship.getCoins();

@@ -5,14 +5,9 @@
  */
 package com.final_project;
 
-import java.util.ArrayList;
-
 import processing.core.PApplet;
 
 public class GameEndController extends GameController {
-
-    ArrayList<OnMousePress> presses = new ArrayList<>(); 
-    // ShopButton s = new ShopButton();
 
     GameEndController(PApplet main_)
     {
@@ -21,19 +16,36 @@ public class GameEndController extends GameController {
 
     public void draw()
     {
-        main.background(0);
-        main.fill(255);
-        main.textSize(35);
-        main.text("You Died!", (main.width/2)-125, (main.height/2)-150);
-        main.text("Press spacebar to try again!", (main.width/2)-225, (main.height/2)+25);
+        main.background(0,128,255);
+        main.fill(0);
+        main.textSize(55);
+        main.text("You died!", (main.width/2)-120, (main.height/2)-150);
+        //main.text("Press spacebar to try again!", (main.width/2)-225, (main.height/2)+25);
+        
         addButtons();
     }
     
     public void mousePressed()
     {
-        for(OnMousePress press : presses )
+        System.out.println("X: " + main.mouseX + " Y: " + main.mouseY);
+            //Rect Mode: 3 (CENTER), so had to do some math to figure this part out!
+
+        //PLAY AGAIN
+        if( (main.mouseX >= 588) && (main.mouseX <= 812) && (main.mouseY >= 363) && (main.mouseY <= 437) )
         {
-            press.mousePressed(main.mouseX, main.mouseY);
+            nextController = GameController.GAME_PLAY; //go to gameplay!
+        }
+
+        //ATTEMPTS PAGE (SHOWS ALL YOUR PAST ATTEMPTS)
+        if( (main.mouseX >= 588) && (main.mouseX <= 812) && (main.mouseY >= 472) && (main.mouseY <= 546) )
+        {
+            nextController = GameController.ATTEMPTS; //go to information about the game!
+        }
+
+        //SHOP
+        if( (main.mouseX >= 588) && (main.mouseX <= 812) && (main.mouseY >= 583) && (main.mouseY <= 657) )
+        {
+            nextController = GameController.SHOP; //go to information about the game!
         }
     }
 
@@ -55,11 +67,28 @@ public class GameEndController extends GameController {
 
     public void addButtons()
     {
-        int x_tR = main.width - 200; 
-        int y_tR = main.height - 200; 
+        //Play Again Button below:
+        main.fill(255);
+        main.rectMode(3);
+        main.rect(main.width/2, main.height/2, 225,75 );
+        main.fill(0);
+        main.textSize(40);
+        main.text("Play Again", main.width/2 - 98, main.height/2 + 15 );
 
-        // ShopButton shopB = new ShopButton(this, x_tR, y_tR);
-        // presses.add(shopB);
+        //Attempts button below:
+        main.fill(255);
+        main.rect(main.width/2, main.height/2 + 109, 225,75 ); //120
+        main.fill(0);
+        main.textSize(40);
+        main.text("Attempts", main.width/2 - 85, main.height/2 + 122 );
+
+        //Shop button below:
+        main.fill(255);
+        main.rect(main.width/2, main.height/2 + 220, 225,75 );
+        main.fill(0);
+        main.textSize(40);
+        main.text("Shop", main.width/2 - 48, main.height/2 + 235 );
+        
     }
 
 }

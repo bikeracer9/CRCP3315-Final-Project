@@ -33,6 +33,7 @@ public class Node {
         this.nextNode = n;
     }
 
+
     /*
      * Getters and Setters for the coinCount
      */
@@ -44,6 +45,5 @@ public class Node {
     {
         this.coinCount = c;
     }
-
 
 }

@@ -19,6 +19,8 @@ public abstract class GameController {
 
     static final int INTRO = 3;
     static final int SHOP = 4; //added the shop
+    static final int INFORMATION = 5; //added an information screen about how to play.
+    static final int ATTEMPTS = 6; //added a page to show previous attempts at the game.
 
     int nextController = DO_NOT_CHANGE;
 

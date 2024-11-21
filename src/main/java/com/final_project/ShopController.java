@@ -14,21 +14,65 @@ import processing.core.PImage;
 public class ShopController extends GameController{
     PImage battleshipImg = main.loadImage("./images/battleship.png");
 
-    LinkedList list = new LinkedList(); 
-    GamePlayState game = new GamePlayState(main);
-    //Battleship ship = new Battleship(main, battleshipImg );
+    int totalCoins;
 
-    ShopController(PApplet main_)
+    LinkedList list = new LinkedList(); 
+    
+    int coins;
+
+    ShopController(PApplet main_, LinkedList list_)
     {
         super(main_);
+        this.list = list_;
     }
 
     public void draw()
     {
+        //background:
+        main.rectMode(3);
         main.background(0,128,255);
         main.fill(0);
+
+        //---- text at the top:
+        main.textSize(45);
+        main.text("Shop:", main.width/2 - 100, 85);
+
+        //this part of code goes through the LinkedList to see how many runs have happened
+        // and shows them on the screen. 
+        main.fill(0);
         main.textSize(35);
-        main.text("Coins: " + game.updateCoins(), 35, 65);
+
+        int cC = 0;
+
+        if (!list.isEmpty()) 
+        {
+
+            Node current = list.head;
+            while (current != null) 
+            {
+                cC = cC + current.getCoinCount();
+                current = current.getNextNode();
+            }
+        }
+
+        main.text("Coins: " + cC, 30, 65);
+
+        // getTotalCoinCount();
+        
+        // if (!list.isEmpty()) {
+        //     int attemptC = 1;
+        //     Node current = list.head;
+        //     int yPosition = 65;
+
+        //     while (current != null) {
+        //         main.text("Attempt: " + attemptC + " Coins: " + current.getCoinCount(), 35, yPosition);
+        //         yPosition += 35; 
+        //         current = current.getNextNode();
+        //         attemptC++;
+        //     }
+        // } else {
+        //     main.text("No attempts made yet.", 35, 65);
+        // }
     }
     
     public void mousePressed()
@@ -36,13 +80,13 @@ public class ShopController extends GameController{
 
     }
 
-    public void setupButtons()
+    public void getTotalCoinCount()
     {
-        int x_tR = main.width - 200;
-        int y_tR = main.height - 200;
-        int spacer = 35;
+        totalCoins = 0;
+        Node current = list.head;
+        while(current != null)
+        {
+            totalCoins += current.getCoinCount();
+        }
     }
-
-
-
 }

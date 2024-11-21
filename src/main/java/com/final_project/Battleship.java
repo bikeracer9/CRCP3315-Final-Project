@@ -13,7 +13,7 @@ import processing.core.PImage;
 public class Battleship extends Particle_Object{
 
     int health = 5; //health, determines when the game ends (loses).
-    int coins = 50; //coins - determines when the game ends (wins!)
+    int coins; //coins - determines when the game ends (wins!)
     float  random_number = (int)main.random(0,4);
     String message = ""; // prints out a message for power up object.
     PImage battleshipImg_ = main.loadImage("./images/battleship.png");
@@ -144,6 +144,12 @@ public class Battleship extends Particle_Object{
     float getCoins()
     {
         return coins;
+    }
+
+    //setter for coins!
+    public void setCoins(int c)
+    {
+        this.coins = c;
     }
     
     //getter for message!
