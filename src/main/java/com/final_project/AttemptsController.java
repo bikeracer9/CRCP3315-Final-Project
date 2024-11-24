@@ -34,17 +34,17 @@ public class AttemptsController extends GameController{
         main.text("Attempts:", main.width/2 - 95, 85);
         main.textSize(35);
 
-        //text for attempts:
+        //text for attempts made:
         if (!list.isEmpty()) {
-            int attemptC = 1;
+            int attemptC = list.getSize();
             Node current = list.head;
             int yPosition = 145;
             
             while (current != null) {
-                main.text("Attempt: " + attemptC + "  Coins: " + current.getCoinCount(), 25, yPosition);
+                main.text("Attempt # " + attemptC + "  Coins: " + current.getCoinCount(), 25, yPosition);
                 yPosition += 40; 
                 current = current.getNextNode();
-                attemptC++;
+                attemptC--;
             }
         } else {
             main.text("No attempts made yet.", 35, 65);

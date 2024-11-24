@@ -37,6 +37,8 @@ public class ShopController extends GameController{
         main.textSize(45);
         main.text("Shop:", main.width/2 - 100, 85);
 
+        addButtons();
+
         //this part of code goes through the LinkedList to see how many runs have happened
         // and shows them on the screen. 
         main.fill(0);
@@ -77,7 +79,21 @@ public class ShopController extends GameController{
     
     public void mousePressed()
     {   
+        System.out.println("X: " + main.mouseX + " Y: " + main.mouseY);
+            //Rect Mode: 3 (CENTER), so had to do some math to figure this part out!
 
+        //PLAY AGAIN
+        if( (main.mouseX >= 938) && (main.mouseX <= 1132) && (main.mouseY >= 48) && (main.mouseY <= 102) )
+        {
+            nextController = GameController.GAME_PLAY; //go to gameplay!
+            // System.out.println("PLAY");
+        }
+
+        if( (main.mouseX >= 1168) && (main.mouseX <= 1362) && (main.mouseY >= 48) && (main.mouseY <= 102) )
+        {
+            nextController = GameController.ATTEMPTS; //go to the shop!
+            // System.out.println("SHOP");
+        }
     }
 
     public void getTotalCoinCount()
@@ -88,5 +104,29 @@ public class ShopController extends GameController{
         {
             totalCoins += current.getCoinCount();
         }
-    }
+    }//end of getTotalCoinCount()
+
+
+    /*
+     * This function draws all the buttons on the Attempt page.
+     */
+    public void addButtons()
+    {
+        //Play Again Button below:
+        main.fill(255);
+        main.rectMode(3);
+        main.rect(main.width - 365, 75, 195,55 );
+        main.fill(0);
+        main.textSize(30);
+        main.text("Play Again", main.width - 440, 85 );
+
+
+        //Statistics (Attempts) Button below:
+        main.fill(255);
+        main.rectMode(3);
+        main.rect(main.width - 135, 75, 195,55 );
+        main.fill(0);
+        main.textSize(30);
+        main.text("Attempts", main.width - 200, 85 );
+    }//end of addButtons()
 }

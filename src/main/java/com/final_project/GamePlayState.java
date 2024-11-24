@@ -27,6 +27,7 @@ public class GamePlayState extends GameController {
     PImage coinImg = main.loadImage("./images/coin.png");
     PImage powerUpImage = main.loadImage("./images/powerUp_1.png");
     PImage healthImage = main.loadImage("./images/heart_1.png");
+    PImage pauseImage = main.loadImage("./images/pause.png");
 
     ArrayList<NPC> npc;
 
@@ -118,7 +119,7 @@ public class GamePlayState extends GameController {
             if( ship.getHealth() <= 0)//if the player dies, player loses
             {
                 nextController = GameController.GAME_END; //draws the end game screen
-                list.insertAtEnd( new Node( (int)ship.getCoins() ) );
+                list.insertAtStart( new Node( (int)ship.getCoins() ) ); //  !!!!
             }
     
             if( ship.getCoins() >= 1000) //if the player has more than 15 coins, player wins
@@ -126,11 +127,6 @@ public class GamePlayState extends GameController {
                 nextController = GameController.GAME_WIN; //draws the win game screen
             }
 
-            if(main.key == 'p' && main.keyPressed == true) 
-            {
-                nextController = GameController.SHOP; //draws the shop screen.
-                
-            }
         }
     
         /*
@@ -171,22 +167,6 @@ public class GamePlayState extends GameController {
         {
             ship.keyPressed();
         }
-
-        // public void keyReleased()
-        // {
-        //     ship.keyReleased();
-        // }
-        // //change the location of the avatar, hooked up w mouseDragged in main.
-        // public void setAvatarLocation(float x, float y)
-        // {
-        //     ship.setLocation(x, y);
-        // }
-       
-        //move avatar when mouse is dragged.
-        // public void mouseDragged()
-        // {
-        //     setAvatarLocation(main.mouseX, main.mouseY);
-        // }
     
         /*
          * Resets the game!
@@ -216,21 +196,32 @@ public class GamePlayState extends GameController {
             main.text("" + ship.getMessage(), 35, 95);
         }
 
-        // public void updateCoins2()
+        // public int updateCoins()
         // {
-        //     int c2 = (int)ship.getCoins();
-        //     ship.setCoins(c2);
+        //     int coins = (int)ship.getCoins();
+        //     return coins;
         // }
-        public int updateCoins()
-        {
-            int coins = (int)ship.getCoins();
-            return coins;
-        }
 
         public void addButtons()
         {
-            main.fill(255,0,0);
+            //below is the pause game button:
+            main.fill(255);
             main.rect(main.width - 175, 65,125, 55);
+            main.fill(0);
+            main.image(pauseImage, main.width - 206, 35, 64, 64);
         }
 
+        public void mousePressed()
+        {
+            System.out.println("X: " + main.mouseX + " Y: " + main.mouseY);
+            //Rect Mode: 3 (CENTER), so had to do some math to figure this part out!
+            if( (main.mouseX >= 1163) && (main.mouseX <= 1287) && (main.mouseY >= 38 ) && (main.mouseY <= 92) )
+            {
+                for(int i = 0; i < particle_Objects.size(); i++)
+            {
+                particle_Objects.get(i).isPaused(true);
+                // System.out.println("e: " + particle_Objects.get(i).isPaused(true));
+            }
+            }
+        }
 }

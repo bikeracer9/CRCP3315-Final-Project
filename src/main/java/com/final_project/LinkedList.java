@@ -45,22 +45,6 @@ public class LinkedList {
         System.out.println("");
     }//end of print()
 
-    void insertAtEnd(Node n)
-    {
-        if(head == null)
-        {
-            head = n;
-        }
-
-        else{
-            Node current = head;
-            while(current.getNextNode() != null) 
-            {
-                current = current.getNextNode();
-            }
-            current.setNextNode(n);
-        }
-    }//end of insertAtEnd()
 
     void clear()  // ?
     {
@@ -73,7 +57,6 @@ public class LinkedList {
     */
     public void reverse()
     {
-        System.out.println("Reversing the Melody: ");
         Node previous = null;//set the previous node to be null.
         Node current = head; //set the current node to be the head node.
         Node next = null;    //set the next node to be null.
@@ -99,6 +82,35 @@ public class LinkedList {
         }
         return c;
     }
+
+    /*
+     * Inserts a Node at the start of the list (prepend).
+     */
+    void insertAtStart(Node node) 
+    {
+        node.setNextNode(head);
+        head = node;
+    }//end of insertAtStart()
+
+    /*
+     * Inserts a Node at the end of the list (append).
+     */
+    void insertAtEnd(Node n)
+    {
+        if(head == null)
+        {
+            head = n;
+        }
+
+        else{
+            Node current = head;
+            while(current.getNextNode() != null) 
+            {
+                current = current.getNextNode();
+            }
+            current.setNextNode(n);
+        }
+    }//end of insertAtEnd()
 
 
 }

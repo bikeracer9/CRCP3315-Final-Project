@@ -22,7 +22,7 @@ public class Particle_Object {
     // float size; //size of the Particle Object
     int alphaValue; //value that changes the Particle Objects opacity. 
     boolean hit; //if the game object has been hit.
-    boolean paused = true; //if the game is paused, then returns true.
+    boolean paused = false; //if the game is paused, then returns true.
     PImage img;
     int img_width, img_height;
     
@@ -126,14 +126,15 @@ public class Particle_Object {
         return p;
     }
     
-    void pauseGame()
+    
+    public void pauseGame()
     {
         if(isPaused(paused) == true)
         {
             this.xVel = 0;
             System.out.println("Paused = " + paused);
         }
-        else
+        else if(isPaused(paused) == false)
         {
             this.xVel = this.prevVel_X;
         }
