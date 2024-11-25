@@ -13,10 +13,12 @@ public class Node {
 
     Node nextNode;
     int coinCount;
+    int distanceTraveled;
     
-    public Node(int coinCount)
+    public Node(int coinCount, int distanceTraveled)
     {
         this.coinCount = coinCount;
+        this.distanceTraveled = distanceTraveled;
         nextNode = null;
     }
 
@@ -44,6 +46,18 @@ public class Node {
     public void setCoinCount(int c)
     {
         this.coinCount = c;
+    }
+
+    /*
+     * Getters and Setters for the distanceTraveled 
+     */
+    public int getDistanceTraveled() {
+        return distanceTraveled;
+    }
+
+    public void setDistanceTraveled(int d)
+    {
+        this.distanceTraveled = d;
     }
 
 }

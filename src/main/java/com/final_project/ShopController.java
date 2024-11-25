@@ -59,22 +59,17 @@ public class ShopController extends GameController{
 
         main.text("Coins: " + cC, 30, 65);
 
-        // getTotalCoinCount();
-        
-        // if (!list.isEmpty()) {
-        //     int attemptC = 1;
-        //     Node current = list.head;
-        //     int yPosition = 65;
+        //Box next to add Lives button:
+        //main.fill(255);
+        //main.rectMode(3);
+        //main.rect(100, 350, 195,55 );
+        main.fill(0);
+        main.textSize(30);
+        main.text("25 coins - Buy Extra Lives:",55, 200 ); 
+        main.textSize(18);
+        main.text("(MAX OF 3)",185, 225 );
 
-        //     while (current != null) {
-        //         main.text("Attempt: " + attemptC + " Coins: " + current.getCoinCount(), 35, yPosition);
-        //         yPosition += 35; 
-        //         current = current.getNextNode();
-        //         attemptC++;
-        //     }
-        // } else {
-        //     main.text("No attempts made yet.", 35, 65);
-        // }
+        
     }
     
     public void mousePressed()
@@ -82,18 +77,27 @@ public class ShopController extends GameController{
         System.out.println("X: " + main.mouseX + " Y: " + main.mouseY);
             //Rect Mode: 3 (CENTER), so had to do some math to figure this part out!
 
-        //PLAY AGAIN
+        //PLAY AGAIN BUTTON
         if( (main.mouseX >= 938) && (main.mouseX <= 1132) && (main.mouseY >= 48) && (main.mouseY <= 102) )
         {
             nextController = GameController.GAME_PLAY; //go to gameplay!
             // System.out.println("PLAY");
         }
-
+        
+        //ATTEMPTS BUTTON
         if( (main.mouseX >= 1168) && (main.mouseX <= 1362) && (main.mouseY >= 48) && (main.mouseY <= 102) )
         {
             nextController = GameController.ATTEMPTS; //go to the shop!
             // System.out.println("SHOP");
         }
+
+        //ADD (MAX of 3) LIVES BUTTON
+        if( (main.mouseX >= 1168) && (main.mouseX <= 1362) && (main.mouseY >= 48) && (main.mouseY <= 102) )
+        {
+            // nextController = GameController.ATTEMPTS; //go to the shop!
+            System.out.println("LIVES!");
+        }
+
     }
 
     public void getTotalCoinCount()
@@ -112,6 +116,7 @@ public class ShopController extends GameController{
      */
     public void addButtons()
     {
+        //---------------- Buttons on the top right:
         //Play Again Button below:
         main.fill(255);
         main.rectMode(3);
@@ -128,5 +133,10 @@ public class ShopController extends GameController{
         main.fill(0);
         main.textSize(30);
         main.text("Attempts", main.width - 200, 85 );
+        //----------------
+
+        //---------------- Buttons for more items (coins & visual changes below:)
+
+
     }//end of addButtons()
 }

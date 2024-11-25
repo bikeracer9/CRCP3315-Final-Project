@@ -41,7 +41,7 @@ public class AttemptsController extends GameController{
             int yPosition = 145;
             
             while (current != null) {
-                main.text("Attempt # " + attemptC + "  Coins: " + current.getCoinCount(), 25, yPosition);
+                main.text("Attempt # " + attemptC + "   Coins: " + current.getCoinCount() + "   Distance: " + current.getDistanceTraveled() + "m ", 25, yPosition);
                 yPosition += 40; 
                 current = current.getNextNode();
                 attemptC--;

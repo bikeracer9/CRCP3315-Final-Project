@@ -16,11 +16,11 @@ public class Battleship extends Particle_Object{
     int coins; //coins - determines when the game ends (wins!)
     float  random_number = (int)main.random(0,4);
     String message = ""; // prints out a message for power up object.
-    PImage battleshipImg_ = main.loadImage("./images/battleship.png");
+    PImage battleshipImg_ = main.loadImage("./images/battleship_2.png");
 
     Battleship(PApplet main_, PImage battleshipImg_)
     {
-        super(main_, battleshipImg_, 128, 128, 255);
+        super(main_, battleshipImg_, 128, 70, 255);
         x = main.width/7;
         y = main_.height/2;
     }
@@ -53,13 +53,13 @@ public class Battleship extends Particle_Object{
                 main.rect(0,0,main.width,main.height);
                 main.rect(0,0,main.width,main.height);
                 health--;
-                System.out.println("Health = " + health);
+                //System.out.println("Health = " + health);
             }
 
             if(object instanceof Loot)
             {
                 coins++;
-                System.out.println("Coins = " + coins);
+                //System.out.println("Coins = " + coins);
             }
 
             if(object instanceof Power_Up) //randomly will do something interesting, 
@@ -69,13 +69,13 @@ public class Battleship extends Particle_Object{
                 {
                     health += 2;
                     message = "Gave you 2 extra Lives!";
-                    System.out.println("Health = " + health);
+                    // System.out.println("Health = " + health);
                 }
                 else if(random_number == 1)
                 {
                     coins += 3;
                     message = "Gave you 3 extra Coins!";
-                    System.out.println("Coins = " + coins);
+                    // System.out.println("Coins = " + coins);
                 }
                 else if(random_number == 2)
                 {
@@ -84,20 +84,23 @@ public class Battleship extends Particle_Object{
                     main.rect(0,0,800,800);
                     health -= 2;
                     message = "Took away 2 Lives!";
-                    System.out.println("Health = " + health);
+                    // System.out.println("Health = " + health);
                 }
                 else if(random_number == 3)
                 {
-                    coins -= 3;
-                    message = "Took away 3 Coins!";
-                    System.out.println("Coins = " + coins);
+                    if(coins >= 3) //edited this function so that if the coins are greater than 3 this happens.. 
+                    { //            (so the user does not end up with negative coins.)
+                        coins -= 3;
+                        message = "Took away 3 Coins!";
+                    }   
+                    // System.out.println("Coins = " + coins);
                 }
                 else if(random_number == 4 || random_number == 5  || random_number == 6  || random_number == 7)
                 {
                     message = "";
-                    System.out.println("Nothing happened...");
+                    // System.out.println("Nothing happened...");
                 }
-                System.out.println("Message = " + message);
+                // System.out.println("Message = " + message);
                 random_number = (int)main.random(0,4);
             }
             if(object instanceof Wave)

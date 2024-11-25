@@ -127,17 +127,34 @@ public class Particle_Object {
     }
     
     
-    public void pauseGame()
-    {
-        if(isPaused(paused) == true)
+    // public void pauseGame()
+    // {
+    //     if(isPaused(paused) == true)
+    //     {
+    //         this.xVel = 0;
+    //         System.out.println("Paused = " + paused);
+    //     }
+    //     else if(isPaused(paused) == false)
+    //     {
+    //         this.xVel = this.prevVel_X;
+    //     }
+    // }
+
+    void pauseGame(boolean paused) {
+        if (paused) 
         {
+            this.prevVel_X = this.xVel;
+            this.prevVel_Y = this.yVel;
             this.xVel = 0;
-            System.out.println("Paused = " + paused);
-        }
-        else if(isPaused(paused) == false)
+            this.yVel = 0;
+        } 
+        
+        else 
         {
             this.xVel = this.prevVel_X;
+            this.yVel = this.prevVel_Y;
         }
     }
+    
 
 }

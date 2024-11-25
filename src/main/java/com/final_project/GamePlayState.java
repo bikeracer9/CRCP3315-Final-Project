@@ -15,20 +15,24 @@ import processing.core.PImage;
 public class GamePlayState extends GameController {
     //PApplet main; //the main class, which has all the processing functionality.
 
-    /*
-     * Below are all the ArrayLists for each of the different objects.
-     */
-
+    //Battleship object
     Battleship ship;
 
+    /*
+     * Below are all the PImage declarations for each of the different objects.
+     */
     PImage bombImg = main.loadImage("./images/bomb_3.png"); //bomb_2.png
-    PImage battleshipImg = main.loadImage("./images/battleship.png");
+    PImage battleshipImg = main.loadImage("./images/battleship_2.png");
     PImage waveImg = main.loadImage("./images/wave_2.png");
     PImage coinImg = main.loadImage("./images/coin.png");
     PImage powerUpImage = main.loadImage("./images/powerUp_1.png");
     PImage healthImage = main.loadImage("./images/heart_1.png");
     PImage pauseImage = main.loadImage("./images/pause.png");
+    PImage playImage = main.loadImage("./images/play.png");
 
+    /*
+     * Below are all the ArrayLists for each of the different objects.
+     */
     ArrayList<NPC> npc;
 
     ArrayList<Loot> loot;
@@ -45,8 +49,18 @@ public class GamePlayState extends GameController {
     
     ArrayList<Particle_Object> particle_Objects;
 
+    //LinkedList object
     LinkedList list;
+
+    //boolean to see if the game is paused
+    boolean isPaused = false;
+
+    //Below declares the Stopwatch variables: (tracks the time to calculate the distance traveled)
+    int startTime;
+    int elapsedTime;
+    int distanceTraveled; 
     
+    //constructor:
     public GamePlayState(PApplet main_, LinkedList list_) 
     {
         super(main_);
@@ -99,6 +113,10 @@ public class GamePlayState extends GameController {
             particle_Objects = new ArrayList();
             particle_Objects.add(ship);
             particle_Objects.addAll(npc);
+
+            //initialize the Stopwatch
+            startTime = main.millis(); //gets the start time.
+            distanceTraveled = 0; //resets distance traveled.
         }
     
         /*
@@ -108,8 +126,14 @@ public class GamePlayState extends GameController {
         {
             main.background(0,128,255); //draw the background
             display(); //display all objects
-            move(); //move the objects
-            collisions(); //check collisions btwn objects. //// ???
+            if(!isPaused)
+            {
+                elapsedTime = main.millis() - startTime; //calculates the time elapsed from start time
+                distanceTraveled = (elapsedTime / 1500); // 1 "meter" per 1.5 seconds
+
+                move(); //move the objects
+                collisions(); //check collisions btwn objects. 
+            }
             text(); //add the text onto the screen.
             addButtons();
             
@@ -119,7 +143,7 @@ public class GamePlayState extends GameController {
             if( ship.getHealth() <= 0)//if the player dies, player loses
             {
                 nextController = GameController.GAME_END; //draws the end game screen
-                list.insertAtStart( new Node( (int)ship.getCoins() ) ); //  !!!!
+                list.insertAtStart( new Node( (int)ship.getCoins(), distanceTraveled ) ); //  !!!!
             }
     
             if( ship.getCoins() >= 1000) //if the player has more than 15 coins, player wins
@@ -157,10 +181,14 @@ public class GamePlayState extends GameController {
     
         public void move()
         {
-            for(int i = 0; i < particle_Objects.size(); i++)
+            if(!isPaused)
             {
-                particle_Objects.get(i).move();
+                for(int i = 0; i < particle_Objects.size(); i++)
+                {
+                    particle_Objects.get(i).move();
+                }
             }
+            
         }
     
         public void keyPressed()
@@ -193,14 +221,10 @@ public class GamePlayState extends GameController {
                 x += 40;
             }
             main.text("Coins: " + (int)ship.getCoins(), 15, 75);
-            main.text("" + ship.getMessage(), 35, 95);
+            main.text("Distance: " + distanceTraveled + "m",15,100); 
+            main.text("" + ship.getMessage(), 15, 125); 
         }
 
-        // public int updateCoins()
-        // {
-        //     int coins = (int)ship.getCoins();
-        //     return coins;
-        // }
 
         public void addButtons()
         {
@@ -208,20 +232,28 @@ public class GamePlayState extends GameController {
             main.fill(255);
             main.rect(main.width - 175, 65,125, 55);
             main.fill(0);
-            main.image(pauseImage, main.width - 206, 35, 64, 64);
+            if(!isPaused)
+            {
+                main.image(pauseImage, main.width - 206, 35, 64, 64);
+            }
+            if(isPaused)
+            {
+                main.image(playImage, main.width - 206, 35, 64, 64);
+            }
+            
         }
 
         public void mousePressed()
         {
-            System.out.println("X: " + main.mouseX + " Y: " + main.mouseY);
+            // System.out.println("X: " + main.mouseX + " Y: " + main.mouseY);
             //Rect Mode: 3 (CENTER), so had to do some math to figure this part out!
             if( (main.mouseX >= 1163) && (main.mouseX <= 1287) && (main.mouseY >= 38 ) && (main.mouseY <= 92) )
             {
+                isPaused = !isPaused;
                 for(int i = 0; i < particle_Objects.size(); i++)
-            {
-                particle_Objects.get(i).isPaused(true);
-                // System.out.println("e: " + particle_Objects.get(i).isPaused(true));
-            }
+                {
+                    particle_Objects.get(i).pauseGame(isPaused);
+                }
             }
         }
 }
