@@ -12,7 +12,10 @@ import processing.core.PImage;
 
 public class Battleship extends Particle_Object{
 
-    int health = 5; //health, determines when the game ends (loses).
+    
+    int health; //health, determines when the game ends (loses).
+    int extraLivesCount; 
+    int shopLivesBought;
     int coins; //coins - determines when the game ends (wins!)
     float  random_number = (int)main.random(0,4);
     String message = ""; // prints out a message for power up object.
@@ -23,6 +26,7 @@ public class Battleship extends Particle_Object{
         super(main_, battleshipImg_, 128, 70, 255);
         x = main.width/7;
         y = main_.height/2;
+        health = 5;
     }
 
     //display the object
@@ -51,8 +55,19 @@ public class Battleship extends Particle_Object{
                 main.fill(255,0,0, 100); //code to display a red box on the screen when you lose health
                 main.rectMode(0);
                 main.rect(0,0,main.width,main.height);
-                main.rect(0,0,main.width,main.height);
-                health--;
+                //main.rect(0,0,main.width,main.height);
+                if(health > 0 )
+                {
+                    health--;
+                    return;
+                }
+                else{
+                    if(extraLivesCount > 0 )
+                    {
+                        extraLivesCount--;
+                    }
+                }
+                
                 //System.out.println("Health = " + health);
             }
 
@@ -82,7 +97,17 @@ public class Battleship extends Particle_Object{
                     main.fill(255,0,0, 190); //code to display a red box on the screen when you lose health
                     main.rectMode(0);
                     main.rect(0,0,800,800);
-                    health -= 2;
+                    if(health > 0 )
+                    {
+                        health--;
+                        return;
+                    }
+                    else{
+                        if(extraLivesCount > 0 )
+                        {
+                            extraLivesCount--;
+                        }
+                    }
                     message = "Took away 2 Lives!";
                     // System.out.println("Health = " + health);
                 }
@@ -143,6 +168,11 @@ public class Battleship extends Particle_Object{
         return health;
     }
 
+    void resetHealth(int h)
+    {
+        this.health = h;
+    }
+
     //getter for coins!
     float getCoins()
     {
@@ -150,7 +180,7 @@ public class Battleship extends Particle_Object{
     }
 
     //setter for coins!
-    public void setCoins(int c)
+    public void resetCoinCount(int c)
     {
         this.coins = c;
     }
@@ -159,5 +189,45 @@ public class Battleship extends Particle_Object{
     String getMessage()
     {
         return message;
+    }
+    
+    public void addExtraLives(int amount)
+    {
+        if((extraLivesCount < 3) && (shopLivesBought < 3))
+        {
+            this.extraLivesCount += amount;
+            this.shopLivesBought += amount;
+        }
+        else
+        {
+            //DO NOTHING if the user already has 3 Extra Lives!
+        }
+    }
+
+    /*
+     * Getters and setters for Extra Lives:
+     */
+    public int getExtraLivesCount()
+    {
+        return this.extraLivesCount;
+    }
+
+    public void setExtraLivesCount(int a)
+    {
+        this.extraLivesCount = a;
+    }
+
+    float getTotalHealth()
+    {
+        return this.health + this.extraLivesCount;
+    }
+
+    /*
+     * This function resets the Extra Lives that have been bought (after dying.) 
+     * 
+     */
+    void resetExtraLivesAfterDeath() 
+    {   
+        this.extraLivesCount = this.shopLivesBought;
     }
 }

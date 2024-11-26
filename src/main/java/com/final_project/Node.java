@@ -14,11 +14,13 @@ public class Node {
     Node nextNode;
     int coinCount;
     int distanceTraveled;
+    int extraLivesCount;
     
-    public Node(int coinCount, int distanceTraveled)
+    public Node(int coinCount, int distanceTraveled) //int extraLivesCount
     {
         this.coinCount = coinCount;
         this.distanceTraveled = distanceTraveled;
+        this.extraLivesCount = extraLivesCount;
         nextNode = null;
     }
 
@@ -59,5 +61,20 @@ public class Node {
     {
         this.distanceTraveled = d;
     }
+
+    /*
+     * Getters and Setters for the extraLivesCount 
+     */
+    public int getExtraLivesCount() 
+    {
+        return extraLivesCount;
+    }
+
+    public void setExtraLivesCount(int e) 
+    {
+        this.extraLivesCount = e;
+    }
+
+    
 
 }

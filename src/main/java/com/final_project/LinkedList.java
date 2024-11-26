@@ -12,10 +12,13 @@ package com.final_project;
 public class LinkedList {
 
     Node head; //head of the LinkedList
+    int extraLives;
+    int extraLivesCount;
 
     public LinkedList()
     {
         head = null;
+        this.extraLives = 0;
     }//end of constructor
 
     /*
@@ -111,6 +114,62 @@ public class LinkedList {
             current.setNextNode(n);
         }
     }//end of insertAtEnd()
+
+
+    // public int getExtraLivesCount()
+    // {
+    //     Node current = head;
+    //     int extraLivesCounter = 0;
+    //     while(current != null)
+    //     {
+    //         extraLivesCounter = current.getExtraLivesCount();
+    //         current = current.getNextNode();
+            
+    //     }
+    //     return extraLivesCounter;
+    // }
+
+
+
+    // public void listGetExtraLivesCount()
+    // {
+    //     Node current = head;
+    //     if(!isEmpty())
+    //     {
+    //         // extraHealth;
+    //         while(current != null)
+    //         {
+    //             current.getExtraLivesCount();
+    //             current = current.getNextNode();
+    //         }
+    //     }
+
+    // }
+
+
+
+    //----
+    // public int listGetExtraLivesCount() //void ?
+    // {
+    //     if(!isEmpty())
+    //     {
+    //         Node current = head;
+    //         while(current.getNextNode() != null) 
+    //         {
+    //             extraLives += current.getExtraLivesCount();
+    //             current = current.getNextNode();
+    //         }
+    //         return extraLives;
+    //     }
+    //     else{
+    //         return 0;
+    //     }
+    // }
+
+    // void setExtraLivesCount(int amount)
+    // {
+    //     this.extraLives += amount;
+    // }
 
 
 }

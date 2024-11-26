@@ -27,6 +27,7 @@ public class GamePlayState extends GameController {
     PImage coinImg = main.loadImage("./images/coin.png");
     PImage powerUpImage = main.loadImage("./images/powerUp_1.png");
     PImage healthImage = main.loadImage("./images/heart_1.png");
+    PImage extraHealthImage = main.loadImage("./images/extraHealth.png");
     PImage pauseImage = main.loadImage("./images/pause.png");
     PImage playImage = main.loadImage("./images/play.png");
 
@@ -59,13 +60,17 @@ public class GamePlayState extends GameController {
     int startTime;
     int elapsedTime;
     int distanceTraveled; 
+
+    //extra Lives:
+    int extraLives;
     
     //constructor:
-    public GamePlayState(PApplet main_, LinkedList list_) 
+    public GamePlayState(PApplet main_, LinkedList list_, Battleship ship_) 
     {
         super(main_);
-        init(); //initialize all the objects
         this.list = list_;
+        this.ship = ship_;
+        init(); //initialize all the objects
     }
     
     /*
@@ -73,7 +78,7 @@ public class GamePlayState extends GameController {
      */
         public void init()
         {    
-            ship = new Battleship(main, battleshipImg);
+            //ship = new Battleship(main, battleshipImg);
             
             npc = new ArrayList();
             loot = new ArrayList();
@@ -117,6 +122,9 @@ public class GamePlayState extends GameController {
             //initialize the Stopwatch
             startTime = main.millis(); //gets the start time.
             distanceTraveled = 0; //resets distance traveled.
+
+            //initialize extra lives:
+            extraLives = ship.getExtraLivesCount();
         }
     
         /*
@@ -140,13 +148,17 @@ public class GamePlayState extends GameController {
             //check to see if we need to end the game
             nextController = GameController.DO_NOT_CHANGE;
     
-            if( ship.getHealth() <= 0)//if the player dies, player loses
+            if( ship.getTotalHealth() <= 0)//if the player dies, player loses
             {
                 nextController = GameController.GAME_END; //draws the end game screen
-                list.insertAtStart( new Node( (int)ship.getCoins(), distanceTraveled ) ); //  !!!!
+                list.insertAtStart( new Node( (int)ship.getCoins(), distanceTraveled ) ); //  , extraLives
+                ship.resetHealth(5); //resets the normal amount of health back to 5.
+                ship.resetCoinCount(0); //resets coins to 0, when you die!
+                ship.resetExtraLivesAfterDeath(); //resets the extra lives to total amt of extra lives that the user bought in the shop
+                // startTime = 0;
             }
     
-            if( ship.getCoins() >= 1000) //if the player has more than 15 coins, player wins
+            if( ship.getCoins() >= 1500) //if the player has more than 15 coins, player wins
             {
                 nextController = GameController.GAME_WIN; //draws the win game screen
             }
@@ -213,13 +225,22 @@ public class GamePlayState extends GameController {
             main.textSize(22);
             main.fill(0);
             // main.text("Health: " + (int)ship.getHealth(), 35, 35);
-            int healthCount = (int)ship.getHealth();
+            int healthCount = (int)ship.getHealth(); //+ list.listGetExtraLivesCount();
+            // System.out.println("healthCount = " + healthCount);
+            // System.out.println("ship.extraLives = " + ship.getExtraLivesCount());
             int x = 15;
-            for(int i = 0; i <  healthCount; i++)
+            for(int i = 0; i < healthCount; i++)
             {
                 main.image(healthImage, 0 + x, 15, 32, 32);
                 x += 40;
             }
+            int extraLivesCount =  + ship.getExtraLivesCount();
+            for(int j = 0; j < extraLivesCount; j++)
+            {
+                main.image(extraHealthImage, 0 + x, 15, 32, 32);
+                x += 40;
+            }
+
             main.text("Coins: " + (int)ship.getCoins(), 15, 75);
             main.text("Distance: " + distanceTraveled + "m",15,100); 
             main.text("" + ship.getMessage(), 15, 125); 
