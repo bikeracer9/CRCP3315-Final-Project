@@ -19,20 +19,23 @@ public class Battleship extends Particle_Object{
     int coins; //coins - determines when the game ends (wins!)
     float  random_number = (int)main.random(0,4);
     String message = ""; // prints out a message for power up object.
-    PImage battleshipImg_ = main.loadImage("./images/battleship_2.png");
+    private PImage battleshipImg; // = main.loadImage("./images/battleship_2.png");
 
     Battleship(PApplet main_, PImage battleshipImg_)
     {
         super(main_, battleshipImg_, 128, 70, 255);
-        x = main.width/7;
-        y = main_.height/2;
+        this.battleshipImg = battleshipImg_;
+        this.x = main.width/7;
+        this.y = main_.height/2;
         health = 5;
     }
 
     //display the object
+    @Override
     void display()
     {
-        super.display();
+        // super.display();
+        main.image(battleshipImg, x, y, 128, 70);
         // main.rect(x, y, img_width * 2, img_width);
         ////?????????????????????????????????????????
 
@@ -229,5 +232,16 @@ public class Battleship extends Particle_Object{
     void resetExtraLivesAfterDeath() 
     {   
         this.extraLivesCount = this.shopLivesBought;
+    }
+
+    void setImage(PImage newImage)
+    {
+        this.battleshipImg = newImage;
+    }   
+
+    void resetLocation(int rX, int rY)
+    {
+        this.x = rX;
+        this.y = rY;
     }
 }

@@ -7,19 +7,20 @@
 package com.final_project;
 
 import processing.core.PApplet;
-import processing.core.PImage;
 
 public class AttemptsController extends GameController{
-    PImage battleshipImg = main.loadImage("./images/battleship.png");
+    // PImage battleshipImg = main.loadImage("./images/battleship.png");
 
     LinkedList list = new LinkedList(); 
+    Battleship ship;
     
     int coins;
 
-    AttemptsController(PApplet main_, LinkedList list_)
+    AttemptsController(PApplet main_, LinkedList list_, Battleship ship_)
     {
         super(main_);
         this.list = list_;
+        this.ship = ship_;
     }
 
     public void draw()

@@ -28,11 +28,11 @@ public class Main extends PApplet {
     //sets up the size of the window
     public void settings()
     {
-        PImage battleshipImg_ = loadImage("./images/battleship_2.png");
+        PImage defaultImage = loadImage("./images/battleship_2.png");
         size(1400, 800);
         // fullScreen();
         list = new LinkedList();
-        ship = new Battleship(this, battleshipImg_);
+        ship = new Battleship(this, defaultImage);
         
         controllers.add(new GamePlayState(this, list, ship) );
         controllers.add(new GameEndController(this) );
@@ -40,7 +40,7 @@ public class Main extends PApplet {
         controllers.add(new GameIntro(this) );
         controllers.add(new ShopController(this, list, ship) );
         controllers.add(new HowToPlayController(this) );
-        controllers.add(new AttemptsController(this, list) );
+        controllers.add(new AttemptsController(this, list, ship) );
     }
     
     /*

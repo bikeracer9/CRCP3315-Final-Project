@@ -155,6 +155,7 @@ public class GamePlayState extends GameController {
                 ship.resetHealth(5); //resets the normal amount of health back to 5.
                 ship.resetCoinCount(0); //resets coins to 0, when you die!
                 ship.resetExtraLivesAfterDeath(); //resets the extra lives to total amt of extra lives that the user bought in the shop
+                ship.resetLocation(main.width/8, main.height/2);
                 // startTime = 0;
             }
     
