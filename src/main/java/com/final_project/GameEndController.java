@@ -6,8 +6,11 @@
 package com.final_project;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class GameEndController extends GameController {
+
+    PImage death_pic = main.loadImage("./images/death_pic.png"); //declaring the image
 
     GameEndController(PApplet main_)
     {
@@ -16,10 +19,11 @@ public class GameEndController extends GameController {
 
     public void draw()
     {
-        main.background(0,128,255);
+        main.background(63, 159, 252);
         main.fill(0);
         main.textSize(55);
-        main.text("You died!", (main.width/2)-120, (main.height/2)-150);
+        main.image(death_pic, 0,0, 1400, 800);
+        //main.text("You died!", (main.width/2)-120, (main.height/2)-150);
         //main.text("Press spacebar to try again!", (main.width/2)-225, (main.height/2)+25);
         
         addButtons();

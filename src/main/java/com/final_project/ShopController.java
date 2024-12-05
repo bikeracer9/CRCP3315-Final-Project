@@ -24,9 +24,9 @@ public class ShopController extends GameController{
     PImage extraHealthImage = main.loadImage("./images/extraHealth.png");
 
     int totalCoins;
-    int HeartCoinCost = 1; //10
-    int SubCoinCost = 1; //25
-    int SubGoldCoinCost = 1; //50
+    int HeartCoinCost = 10; //10
+    int SubCoinCost = 25; //25
+    int SubGoldCoinCost = 50; //50
 
     LinkedList list = new LinkedList(); 
     Battleship ship;
@@ -59,7 +59,7 @@ public class ShopController extends GameController{
     {
         //background:
         main.rectMode(3);
-        main.background(0,128,255);
+        main.background(63, 159, 252);
         main.fill(0);
 
         drawExtraHearts(); //   <-- draws the extra hearts bought next to the button

@@ -26,7 +26,7 @@ public class HowToPlayController extends GameController{
         //background:
         main.rectMode(3);
         // main.noStroke();
-        main.background(0,128,255);
+        main.background(63, 159, 252);
         main.fill(0);
 
         //---- text (with images) about how to play:

@@ -28,9 +28,10 @@ public class Main extends PApplet {
     //sets up the size of the window
     public void settings()
     {
-        PImage defaultImage = loadImage("./images/battleship_2.png");
+        
         size(1400, 800);
         // fullScreen();
+        PImage defaultImage = loadImage("./images/battleship_2.png");
         list = new LinkedList();
         ship = new Battleship(this, defaultImage);
         

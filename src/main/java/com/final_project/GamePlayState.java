@@ -132,7 +132,7 @@ public class GamePlayState extends GameController {
          */
         public void draw()
         {
-            main.background(0,128,255); //draw the background
+            main.background(63, 159, 252); //draw the background
             display(); //display all objects
             if(!isPaused)
             {
@@ -159,7 +159,7 @@ public class GamePlayState extends GameController {
                 // startTime = 0;
             }
     
-            if( ship.getCoins() >= 1500) //if the player has more than 15 coins, player wins
+            if( ship.getCoins() >= 2500) //if the player has more than 15 coins, player wins
             {
                 nextController = GameController.GAME_WIN; //draws the win game screen
             }
